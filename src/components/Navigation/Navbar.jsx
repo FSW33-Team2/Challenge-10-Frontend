@@ -1,5 +1,7 @@
 'use client';
 import React from "react";
+import Link from "next/link";
+
 import {
   Navbar,
   Collapse,
@@ -18,7 +20,7 @@ function NavList() {
         className="p-1 font-medium"
       >
         <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Pages
+          Home
         </a>
       </Typography>
       <Typography
@@ -28,7 +30,7 @@ function NavList() {
         className="p-1 font-medium"
       >
         <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Account
+          Game List
         </a>
       </Typography>
       <Typography
@@ -38,7 +40,7 @@ function NavList() {
         className="p-1 font-medium"
       >
         <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Blocks
+          Leaderboard
         </a>
       </Typography>
       <Typography
@@ -47,9 +49,19 @@ function NavList() {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a href="#" className="flex items-center hover:text-blue-500 transition-colors">
-          Docs
-        </a>
+        <div className="flex items-center ">
+
+          <a href="/auth/login" className="hover:text-blue-500 transition-colors">
+            Login 
+          </a>
+          <div className="mx-1">
+            /
+          </div>
+          
+          <a href="/auth/register" className=" hover:text-blue-500 transition-colors">
+            Register
+          </a>
+        </div>
       </Typography>
     </ul>
   );
