@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.1",
+    "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "10.4.15",
+<<<<<<< HEAD
     "axios": "^1.4.0",
     "dotenv": "^16.1.4",
+=======
+    "axios": "^1.5.0",
+>>>>>>> dev-shendy
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "js-cookie": "^3.0.5",
@@ -23,8 +31,13 @@
     "postcss": "^8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+<<<<<<< HEAD
     "react-redux": "^8.0.7",
     "swr": "^2.1.5",
+=======
+    "react-redux": "^8.1.2",
+    "react-router-dom": "^6.15.0",
+>>>>>>> dev-shendy
     "tailwindcss": "3.3.3"
   }
 }

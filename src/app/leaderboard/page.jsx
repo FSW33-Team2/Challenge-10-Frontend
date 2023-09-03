@@ -1,21 +1,21 @@
-import CarouselCustomNavigation from '@/components/LandingPage/Carousel'
-import { LandingPageCard } from '@/components/LandingPage/GameList'
-import LandingPageSpesification from '@/components/LandingPage/Spesification'
-import FooterWithSocialLinks from '@/components/Navigation/Footer'
 import NavbarSimple from '@/components/Navigation/Navbar'
+import LeaderboardPage from '@/components/Leaderboard/LeaderboardPage'
+import FooterWithSocialLinks from '@/components/Navigation/Footer'
 import Image from 'next/image'
+
 // import { ThemeProvider } from "@material-tailwind/react";
+export const metadata = {
+  title: "Leaderboard",
+};
 
 export default function Home() {
   return (
     
     <main className="">
       <NavbarSimple />
-      <CarouselCustomNavigation />
-      <LandingPageCard />
-      <LandingPageSpesification />
+      <LeaderboardPage />
       <FooterWithSocialLinks />
-      
+
     </main>
   )
 }
