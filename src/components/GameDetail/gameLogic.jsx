@@ -12,11 +12,13 @@ import {
   finishGame,
   updateRound,
 } from "../../redux/features/RpsGameSlice";
+import { useParams } from "next/navigation";
 
 const choices = ["rock", "paper", "scissors"];
 
 const RPSLogic = () => {
   const dispatch = useDispatch();
+  const params = useParams();
   const {
     currentRound,
     playerScore,
@@ -31,8 +33,6 @@ const RPSLogic = () => {
     if (currentRound > 0) {
       dispatch(updateInfo(`${playerwinRound} - ${botwinRound}`));
     }
-    console.log(gameInfo);
-    console.log(result);
   }, [dispatch, botwinRound, playerwinRound, currentRound, result]);
 
   useEffect(() => {
@@ -84,9 +84,9 @@ const RPSLogic = () => {
       (playerChoice === "scissors" && botChoice === "paper")
     ) {
       const result = "PLAYER WIN";
-      // if (result === "PLAYER WIN") {
-      //   sendScoreToAPI();
-      // }
+      if (result === "PLAYER WIN") {
+        sendScoreToAPI();
+      }
       dispatch(updateRound({ playerwinRound: 1, botwinRound: 0 }));
       return result;
     } else {
@@ -95,16 +95,24 @@ const RPSLogic = () => {
     }
   };
 
-  // const sendScoreToAPI = async () => {
-  //   try {
-  //     const userId = Cookies.get("userId");
-  //     await axios.post(
-  //
-  //     );
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const sendScoreToAPI = async () => {
+    try {
+      const userId = 1;
+      const gameId = params.id;
+
+      const CreateScoreRouter = await axios.post(
+        `api/score/${gameId}/${userId}`,
+        { score: 1 }
+      );
+      if (CreateScoreRouter.status !== 200) {
+        console.log("Save data has failed");
+      } else {
+        console.log("Save data has success");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
