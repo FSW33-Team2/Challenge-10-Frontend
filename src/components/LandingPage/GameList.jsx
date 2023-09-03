@@ -14,11 +14,7 @@ export function LandingPageCard() {
       <div className="w-full text-center text-black">
         <Typography variant="h2">Game List</Typography>
       </div>
-<<<<<<< HEAD
-      <div className="grid grid-cols-4 gap-4 my-4">
-=======
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
->>>>>>> dev-shendy
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
