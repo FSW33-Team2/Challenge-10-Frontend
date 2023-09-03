@@ -1,15 +1,16 @@
 "use client";
 
 import { Card, Typography } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMedal } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchLeaderboard } from "@/redux/features/LeaderboardListSlice";
 
 export default function LeaderboardPage({ refresh }) {
-  const [players, setPlayers] = useState([]);
   const TABLE_HEAD = ["No", "Username", "Level", "Score", "Achievement", ""];
-
+  const dispatch = useDispatch();
+  const leaderboards = useSelector((state) => state.leaderboard.data);
   const TABLE_ROWS = [
     {
       no: "1",
@@ -52,24 +53,8 @@ export default function LeaderboardPage({ refresh }) {
   ];
 
   useEffect(() => {
-    loadPlayersFromApi();
-  }, [refresh]);
-
-  const loadPlayersFromApi = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/api/score/leaderboard`
-      );
-      const playerData = response.data.data;
-
-      // Sort data based on score in descending order
-
-      setPlayers(playerData);
-      console.log(playerData);
-    } catch (error) {
-      console.error("Error fetching player data:", error);
-    }
-  };
+    dispatch(fetchLeaderboard());
+  }, [dispatch]);
 
   const achievement = (position) => {
     switch (position) {
@@ -134,7 +119,7 @@ export default function LeaderboardPage({ refresh }) {
               </tr>
             </thead>
             <tbody>
-              {players.map((player, index) => {
+              {leaderboards.map((player, index) => {
                 const isLast = index === TABLE_ROWS.length - 1;
                 const classes = isLast
                   ? "p-4"
