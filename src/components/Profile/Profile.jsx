@@ -8,11 +8,15 @@ import {
   Button,
 } from "@material-tailwind/react";
 import React, { useState } from 'react';
+import Modal from "react-modal";
  
 export function ProfileCard() {
 
   const [email, setEmail] = useState('user@example.com');
   const [password, setPassword] = useState('yourpassword');
+  const initialData = { email: 'user@example.com', password: 'yourpassword' };
+  const [formData, setFormData] = useState(initialData);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -23,12 +27,49 @@ export function ProfileCard() {
   };
 
   const handleEditButtonClick = () => {
-    // Implement logic to update email and password on server or wherever needed
-    console.log('Editing...');
-    console.log('New Email:', email);
-    console.log('New Password:', password);
-    // You can make API calls, update state, or perform any other actions here
+    // Simulasikan pengambilan data pengguna dari database
+    const userDataFromDatabase = {
+      email: 'newuser@example.com',
+      password: 'newpassword',
+    };
+
+    // Kemudian set data yang diterima dari database ke state
+    setEmail(userDataFromDatabase.email);
+    setPassword(userDataFromDatabase.password);
+
+    // Setelah itu, buka modal
+    setIsModalOpen(true);
   };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalCancel = () => {
+    const confirmCancel = window.confirm(
+      "Apakah Anda yakin ingin membatalkan perubahan? Data akan kembali ke data awal."
+    );
+  
+    if (confirmCancel) {
+      // Kembalikan data ke data awal
+      setEmail(initialData.email);
+      setPassword(initialData.password);
+  
+      // Tutup modal setelah mengonfirmasi pembatalan
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleSaveChanges = () => {
+    // Implementasikan logika penyimpanan perubahan di sini
+    console.log("Saving changes...");
+    console.log("New Email:", email);
+    console.log("New Password:", password);
+
+    // Setelah menyimpan perubahan, tutup modal
+    setIsModalOpen(false);
+  };
+
 const TABLE_HEAD = ["Username", "Game", "Score", "Medals"];
 
 const TABLE_ROWS = [
@@ -81,7 +122,6 @@ const TABLE_ROWS = [
               id="email"
               name="email"
               value={email}
-              onChange={handleEmailChange}
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               />
               </div>
@@ -92,7 +132,6 @@ const TABLE_ROWS = [
                  id="password"
                 name="password"
                 value={password}
-                onChange={handlePasswordChange}
                 class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
                 </div>
@@ -194,6 +233,66 @@ const TABLE_ROWS = [
     </Card>
       </div>
       </div>
+       {/* Modal */}
+       <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleModalClose}
+        contentLabel="Edit Profile Modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+          content: {
+            maxWidth: "400px",
+            maxHeight: "300px",
+            margin: "auto",
+            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center", 
+          },
+        }}
+      >
+        <button
+        className="absoulte absolute top-3 right-3 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+        onClick={handleModalClose}
+        >
+          &times;
+        </button>
+        <h2>Edit Profile</h2>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-500 font-bold mb-1">Email:</label>
+          <input
+          type="email"
+          id="email"
+          name="email"
+          value={email}
+          onChange={handleEmailChange}
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          />
+        </div>
+        
+        <div class="mb-4">
+          <label for="password" class="block text-gray-500 font-bold mb-1">Password:</label>
+          <input
+          type="password"
+          id="password"
+          name="password"
+          value={password}
+          onChange={handlePasswordChange}
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          />
+        </div>
+        <div className="flex">
+          <Button 
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+          onClick={handleSaveChanges}>Save Changes</Button>
+          <Button 
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+          onClick={handleModalCancel}>Cancel</Button>
+        </div>
+      </Modal>
     </div>
   );
 }
