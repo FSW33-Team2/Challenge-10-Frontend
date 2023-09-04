@@ -1,10 +1,9 @@
-import Image from "next/image";
 import cardList from "./data";
 
 export default function Home() {
   return (
     <main className="container items-center mx-auto py-36 py-8">
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mx-auto py-36 py-8">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mx-auto">
         {cardList.map((card) => (
           <div className="shadow-lg rounded-lg">
             <img className="rounded-t-lg" src={card.img} alt="" />
