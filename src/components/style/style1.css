@@ -1,0 +1,51 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/*----page1----------*/
+.profile {
+  background-image: url(../images/main-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 146.1vh;
+}
+
+.mb-4 {
+  margin-top: 5vh;
+  width: 125%;
+}
+
+.text-muted-9 {
+  text-align: center;
+  margin: 10px;
+}
+
+.text-center {
+  background-color: white;
+}
+
+.ini-apa {
+  border: 10px solid red;
+}
+
+.data {
+  border: 5px solid black;
+  width: 50vw;
+  background-color: white;
+  margin-left: 40vw;
+  margin-top: 50vh;
+}
+
+.picture {
+  position: absolute;
+  border: 5px solid black;
+  top: 50vh;
+  left: 13vw;
+  background-color: rgba(222, 149, 14, 0.918);
+  width: 25vw;
+}
+
+.body1 {
+  background-color: blue;
+}
