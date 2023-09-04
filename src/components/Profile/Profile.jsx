@@ -8,6 +8,8 @@ import {
   Button,
 } from "@material-tailwind/react";
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMedal } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
  
 export function ProfileCard() {
@@ -77,21 +79,25 @@ const TABLE_ROWS = [
     username: "John Michael",
     game: "Rock,Paper,Scissors",
     score: "4000",
+    achievement: "",
   },
   {
     username: "John Michael",
     game: "Rock,Paper,Scissors",
     score: "4000",
+    achievement: "",
   },
   {
     username: "John Michael",
     game: "Rock,Paper,Scissors",
     score: "4000",
+    achievement: "",
   },
   {
     username: "John Michael",
     game: "Rock,Paper,Scissors",
     score: "4000",
+    achievement: "",
   },
   {
     username: "John Michael",
@@ -99,6 +105,19 @@ const TABLE_ROWS = [
     score: "4000",
   },
 ];
+
+const achievement = (position) => {
+  switch (position) {
+    case 1:
+      return <FontAwesomeIcon icon={faMedal} color="gold" />;
+    case 2:
+      return <FontAwesomeIcon icon={faMedal} color="silver" />;
+    case 3:
+      return <FontAwesomeIcon icon={faMedal} color="brown" />;
+    default:
+      return null;
+  }
+};
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3">
@@ -152,9 +171,9 @@ const TABLE_ROWS = [
       <table className="w-full min-w-max table-auto text-left">
         <thead>
           <tr>
-            {TABLE_HEAD.map((head) => (
+          {TABLE_HEAD.map((head, index) => (
               <th
-                key={head}
+                key={index}
                 className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
               >
                 <Typography
@@ -169,7 +188,7 @@ const TABLE_ROWS = [
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map(({ username, game, score }, index) => {
+        {TABLE_ROWS.map(({ username, game, score }, index) => {
             const isLast = index === TABLE_ROWS.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
  
@@ -181,7 +200,7 @@ const TABLE_ROWS = [
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {username}
+                    {index + 1}. {username}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -202,17 +221,7 @@ const TABLE_ROWS = [
                     {score}
                   </Typography>
                 </td>
-                <td className={classes}>
-                  <Typography
-                    as="a"
-                    href="#"
-                    variant="small"
-                    color="blue-gray"
-                    className="font-medium"
-                  >
-                    Edit
-                  </Typography>
-                </td>
+                <td className={classes}>{achievement(index + 1)}</td>
               </tr>
             );
           })}
