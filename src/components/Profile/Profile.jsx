@@ -20,7 +20,6 @@ export function ProfileCard() {
   const [password, setPassword] = useState('yourpassword')
   const initialData = { email: 'user@example.com', password: 'yourpassword' }
   const [formData, setFormData] = useState(initialData)
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(!open)
 
@@ -32,23 +31,8 @@ export function ProfileCard() {
     setPassword(event.target.value)
   }
 
-  const handleEditButtonClick = () => {
-    // Simulasikan pengambilan data pengguna dari database
-    const userDataFromDatabase = {
-      email: 'newuser@example.com',
-      password: 'newpassword',
-    }
-
-    // Kemudian set data yang diterima dari database ke state
-    setEmail(userDataFromDatabase.email)
-    setPassword(userDataFromDatabase.password)
-
-    // Setelah itu, buka modal
-    setIsModalOpen(true)
-  }
-
-  const handleModalClose = () => {
-    setIsModalOpen(false)
+  const handleClose = () => {
+    handleOpen(false)
   }
 
   const handleModalCancel = () => {
@@ -62,18 +46,8 @@ export function ProfileCard() {
       setPassword(initialData.password)
 
       // Tutup modal setelah mengonfirmasi pembatalan
-      setIsModalOpen(false)
+      handleOpen(false)
     }
-  }
-
-  const handleSaveChanges = () => {
-    // Implementasikan logika penyimpanan perubahan di sini
-    console.log('Saving changes...')
-    console.log('New Email:', email)
-    console.log('New Password:', password)
-
-    // Setelah menyimpan perubahan, tutup modal
-    setIsModalOpen(false)
   }
 
   const TABLE_HEAD = ['Username', 'Game', 'Score', 'Medals']
@@ -126,11 +100,27 @@ export function ProfileCard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3">
       {/* Modal */}
+      
       <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>Its a simple dialog.</DialogHeader>
+        <DialogHeader className='font-bold text-2xl'>Edit Profile
+        <button
+        onClick={handleClose}
+        className="ml-auto text-gray-500 hover:text-red-500 hover:bg-transparent focus:outline-none">
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          >
+          <path
+          fillRule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clipRule="evenodd"
+          />
+          </svg>
+          </button>
+        </DialogHeader>
         <DialogBody divider>
-          <h2 className="font-bold text-2xl">Edit Profile</h2>
-          <br />
           <div class="mb-4">
             <label for="email" class="block text-gray-500 font-bold mb-1">
               Email:
@@ -163,16 +153,17 @@ export function ProfileCard() {
           <Button
             variant="text"
             color="red"
-            onClick={handleOpen}
+            onClick={handleModalCancel}
             className="mr-1"
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="green" onClick={handleOpen}>
+          <Button variant="gradient" color="blue" onClick={handleOpen} className="hover:bg-blue-400 hover:text-white">
             <span>Confirm</span>
           </Button>
         </DialogFooter>
       </Dialog>
+
       {/* End Modal  */}
 
       <div className="col-span-1">
