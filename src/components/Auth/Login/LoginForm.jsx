@@ -3,9 +3,12 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { LoginAction } from '@/redux/features/Auth/AuthReducer'
+import { useDispatch } from 'react-redux'
 axios.defaults.withCredentials = true
 
 export default function LoginFormPage() {
+  const dispatch = useDispatch()
   const [state, setState] = React.useState({
     email: '',
     password: '',
@@ -27,10 +30,19 @@ export default function LoginFormPage() {
     const { email, password } = state
 
     try {
-      await axios.post('http://localhost:8000/api/auth/login', {
-        email: email,
-        password: password,
-      })
+      const postLogin = await axios.post(
+        'http://localhost:8000/api/auth/login',
+        {
+          email: email,
+          password: password,
+        }
+      )
+
+      if (postLogin.status !== 200) {
+        setMsg(error.response.data.msg)
+      } else {
+        dispatch(LoginAction())
+      }
       router.push('/')
     } catch (error) {
       if (error.response) {
