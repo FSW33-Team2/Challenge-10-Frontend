@@ -4,6 +4,8 @@ import LeaderboardListSlice from './features/LeaderboardListSlice'
 import GamesByIdSlice from './features/GamesByIdSlice'
 import DynamicButton from './features/DynamicButton'
 import DummyGames from './features/DummyGames'
+import UserTokenSlice from './features/Auth/UserTokenSlice'
+import AuthReducer from './features/Auth/AuthReducer'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +14,7 @@ export const store = configureStore({
     allgames: GamesByIdSlice,
     button: DynamicButton,
     DummyGames,
+    usertoken: UserTokenSlice,
+    authreducer: AuthReducer,
   },
 })

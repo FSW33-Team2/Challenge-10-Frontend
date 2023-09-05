@@ -131,8 +131,8 @@ export function ProfileCard() {
         <DialogBody divider>
           <h2 className="font-bold text-2xl">Edit Profile</h2>
           <br />
-          <div class="mb-4">
-            <label for="email" class="block text-gray-500 font-bold mb-1">
+          <div className="mb-4">
+            <label for="email" className="block text-gray-500 font-bold mb-1">
               Email:
             </label>
             <input
@@ -141,12 +141,15 @@ export function ProfileCard() {
               name="email"
               value={email}
               onChange={handleEmailChange}
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
 
-          <div class="mb-4">
-            <label for="password" class="block text-gray-500 font-bold mb-1">
+          <div className="mb-4">
+            <label
+              for="password"
+              className="block text-gray-500 font-bold mb-1"
+            >
               Password:
             </label>
             <input
@@ -155,7 +158,7 @@ export function ProfileCard() {
               name="password"
               value={password}
               onChange={handlePasswordChange}
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
         </DialogBody>
@@ -202,10 +205,10 @@ export function ProfileCard() {
               >
                 Username
               </Typography>
-              <div class="mb-4">
+              <div className="mb-4">
                 <label
                   for="email"
-                  class="text-gray-500 font-bold mb-1 mb-0 pr-4"
+                  className="text-gray-500 font-bold mb-1 mb-0 pr-4"
                 >
                   Email:
                 </label>{' '}
@@ -214,14 +217,14 @@ export function ProfileCard() {
                   id="email"
                   name="email"
                   value={email}
-                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
               </div>
 
-              <div class="mb-4">
+              <div className="mb-4">
                 <label
                   for="password"
-                  class="text-gray-500 font-bold mb-1 mb-0 pr-4"
+                  className="text-gray-500 font-bold mb-1 mb-0 pr-4"
                 >
                   Password:
                 </label>{' '}
@@ -230,7 +233,7 @@ export function ProfileCard() {
                   id="password"
                   name="password"
                   value={password}
-                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
               </div>
               <Button
