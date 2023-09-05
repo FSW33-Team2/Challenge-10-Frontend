@@ -1,78 +1,79 @@
-"use client";
+'use client'
 
-import { Card, Typography } from "@material-tailwind/react";
-import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMedal } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import { fetchLeaderboard } from "@/redux/features/LeaderboardListSlice";
+import { Card, Typography } from '@material-tailwind/react'
+import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMedal } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useState } from 'react'
+import { fetchLeaderboard } from '@/redux/features/LeaderboardListSlice'
 
 export default function LeaderboardPage({ refresh }) {
-  const TABLE_HEAD = ["No", "Username", "Level", "Score", "Achievement", ""];
-  const dispatch = useDispatch();
-  const leaderboards = useSelector((state) => state.leaderboard.data);
+  const TABLE_HEAD = ['No', 'Username', 'Level', 'Score', 'Achievement', '']
+  const dispatch = useDispatch()
+  const leaderboards = useSelector((state) => state.leaderboard.data)
+  console.log(leaderboards)
   const TABLE_ROWS = [
     {
-      no: "1",
-      username: "username1",
-      level: "60",
-      score: "2000",
-      achievement: "",
+      no: '1',
+      username: 'username1',
+      level: '60',
+      score: '2000',
+      achievement: '',
       position: 1,
     },
     {
-      no: "2",
-      username: "username2",
-      level: "55",
-      score: "1500",
-      achievement: "",
+      no: '2',
+      username: 'username2',
+      level: '55',
+      score: '1500',
+      achievement: '',
       position: 2,
     },
     {
-      no: "3",
-      username: "username3",
-      level: "48",
-      score: "1230",
-      achievement: "",
+      no: '3',
+      username: 'username3',
+      level: '48',
+      score: '1230',
+      achievement: '',
       position: 3,
     },
     {
-      no: "4",
-      username: "username4",
-      level: "34",
-      score: "1000",
-      achievement: "",
+      no: '4',
+      username: 'username4',
+      level: '34',
+      score: '1000',
+      achievement: '',
     },
     {
-      no: "5",
-      username: "username5",
-      level: "21",
-      score: "990",
-      achievement: "",
+      no: '5',
+      username: 'username5',
+      level: '21',
+      score: '990',
+      achievement: '',
     },
-  ];
+  ]
 
   useEffect(() => {
-    dispatch(fetchLeaderboard());
-  }, [dispatch]);
+    dispatch(fetchLeaderboard())
+  }, [dispatch])
 
   const achievement = (position) => {
     switch (position) {
       case 1:
-        return <FontAwesomeIcon icon={faMedal} color="gold" />;
+        return <FontAwesomeIcon icon={faMedal} color="gold" />
       case 2:
-        return <FontAwesomeIcon icon={faMedal} color="silver" />;
+        return <FontAwesomeIcon icon={faMedal} color="silver" />
       case 3:
-        return <FontAwesomeIcon icon={faMedal} color="brown" />;
+        return <FontAwesomeIcon icon={faMedal} color="brown" />
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
     <div className="mx-4 my-8">
       <Typography
-        variant="large"
+        variant="h2"
         color="blue-gray"
         className="font-semibold text-2xl mb-4 text-center"
       >
@@ -120,11 +121,11 @@ export default function LeaderboardPage({ refresh }) {
             </thead>
             <tbody>
               {leaderboards.map((player, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
+                const isLast = index === TABLE_ROWS.length - 1
                 const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
-                const userAchievement = achievement(index + 1);
+                  ? 'p-4'
+                  : 'p-4 border-b border-blue-gray-50'
+                const userAchievement = achievement(index + 1)
 
                 return (
                   <tr key={index}>
@@ -166,12 +167,12 @@ export default function LeaderboardPage({ refresh }) {
                     </td>
                     <td className={classes}>{userAchievement}</td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
         </Card>
       </div>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   Card,
   CardHeader,
@@ -6,16 +6,15 @@ import {
   CardFooter,
   Typography,
   Button,
-} from "@material-tailwind/react";
- 
+} from '@material-tailwind/react'
+
 export function GameListPage() {
   return (
     <div className="w-full py-5">
       <div className="w-full text-center text-black">
         <Typography variant="h2">Game List</Typography>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
-
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
@@ -29,8 +28,8 @@ export function GameListPage() {
               Rock Paper Scissors
             </Typography>
             <Typography>
-            If you love Rock Paper Scissors in real life but don't have anyone to 
-            play with, then this game will help you pass your time
+              If you love Rock Paper Scissors in real life but don't have anyone
+              to play with, then this game will help you pass your time
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
@@ -51,10 +50,10 @@ export function GameListPage() {
               Metal Slug: Awakening
             </Typography>
             <Typography>
-            Metal Slug is a series of Japanese arcade games. 
-            The original game has been enhanced for mobile versions and other 
-            consoles over the years. 
-            Various other devices also have several Metal Slug games to play.
+              Metal Slug is a series of Japanese arcade games. The original game
+              has been enhanced for mobile versions and other consoles over the
+              years. Various other devices also have several Metal Slug games to
+              play.
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
@@ -72,21 +71,19 @@ export function GameListPage() {
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-            PlayerUnknown's Battlegrounds (PUBG)
+              PlayerUnknown's Battlegrounds (PUBG)
             </Typography>
             <Typography>
-            PlayerUnknown's Battlegrounds (PUBG) is a battle royale game, 
-            where 100 people at once can play online. 
-            The winner of this game is the individual or team that survives to the end.
+              PlayerUnknown's Battlegrounds (PUBG) is a battle royale game,
+              where 100 people at once can play online. The winner of this game
+              is the individual or team that survives to the end.
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
             <Button>Show Score</Button>
           </CardFooter>
         </Card>
-
       </div>
-      
     </div>
-  );
+  )
 }
