@@ -108,7 +108,9 @@ const RPSLogic = () => {
       console.log(response.data.accessToken)
       const decoded = jwtDecode(response.data.accessToken)
       setUserId(decoded.userId)
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const sendScoreToAPI = async () => {

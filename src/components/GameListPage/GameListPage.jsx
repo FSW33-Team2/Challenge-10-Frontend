@@ -19,10 +19,19 @@ export function GameListPage() {
   const historyData = useSelector((state) => state.gamehistory.data)
   const [history, setHistory] = useState(historyData)
 
-  console.log(data)
-  console.log(historyData)
+  const hasHistory = () => {
+    if (history.length !== 0) {
+      return (
+        <div className="w-full text-center text-black mt-[20px]">
+          <Typography variant="h2">Your History</Typography>
+        </div>
+      )
+    }
+  }
+
   useEffect(() => {
     dispatch(fetchAllGames())
+    hasHistory()
   }, [dispatch])
 
   const addToHistory = (gameData) => {
@@ -35,9 +44,8 @@ export function GameListPage() {
       <div className="w-full text-center text-black">
         <Typography variant="h2">Game List</Typography>
       </div>
-      <div className="w-full text-center text-black mt-[20px]">
-        <Typography variant="h2">Your History</Typography>
-      </div>
+      {hasHistory()}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
         {history.map((data, index) => {
           return (
@@ -189,6 +197,33 @@ export function GameListPage() {
               PlayerUnknown's Battlegrounds (PUBG) is a battle royale game,
               where 100 people at once can play online. The winner of this game
               is the individual or team that survives to the end.
+            </Typography>
+          </CardBody>
+          <CardFooter className="pt-0">
+            <Link href={`/gamedetail/dummy`}>
+              <Button>Play Game</Button>
+            </Link>
+          </CardFooter>
+        </Card>
+
+        <Card className="mt-6 w-full">
+          <CardHeader color="blue-gray" className="relative h-56">
+            <Link href={`/gamedetail/dummy`}>
+              <img
+                src="/GameListPageImage/free-fire.jpg"
+                alt="card-image"
+                className="w-full h-full object-cover"
+              />
+            </Link>
+          </CardHeader>
+          <CardBody>
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+              PlayerUnknown's Battlegrounds (PUBG)
+            </Typography>
+            <Typography>
+              Free Fire is a multiplayer battle royale mobile game, developed
+              and published by Garena for Android and iOS. Battle in Style and
+              be the last survivor!
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
