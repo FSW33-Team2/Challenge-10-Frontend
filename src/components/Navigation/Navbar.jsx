@@ -64,7 +64,12 @@ export default function NavbarSimple() {
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
         >
-          LOGO
+          <Link
+            href="/"
+            className="flex items-center hover:text-blue-500 transition-colors"
+          >
+            LOGO
+          </Link>
         </Typography>
         <div className="hidden lg:block">
           <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -74,12 +79,12 @@ export default function NavbarSimple() {
               color="blue-gray"
               className="p-1 font-medium"
             >
-              <a
+              <Link
                 href="/"
                 className="flex items-center hover:text-blue-500 transition-colors"
               >
                 Home
-              </a>
+              </Link>
             </Typography>
             <Typography
               as="li"
@@ -87,12 +92,12 @@ export default function NavbarSimple() {
               color="blue-gray"
               className="p-1 font-medium"
             >
-              <a
+              <Link
                 href="/gamelist"
                 className="flex items-center hover:text-blue-500 transition-colors"
               >
                 Game List
-              </a>
+              </Link>
             </Typography>
             <Typography
               as="li"
@@ -100,12 +105,12 @@ export default function NavbarSimple() {
               color="blue-gray"
               className="p-1 font-medium"
             >
-              <a
+              <Link
                 href="/leaderboard"
                 className="flex items-center hover:text-blue-500 transition-colors"
               >
                 Leaderboard
-              </a>
+              </Link>
             </Typography>
             {isLoggedIn ? (
               <Typography
@@ -115,12 +120,12 @@ export default function NavbarSimple() {
                 className="p-1 font-medium"
               >
                 <div className="flex items-center ">
-                  <a
+                  <Link
                     href="/profile"
                     className="hover:text-blue-500 transition-colors"
                   >
                     Profile
-                  </a>
+                  </Link>
                   <div className="mx-1">/</div>
 
                   <button
@@ -139,20 +144,20 @@ export default function NavbarSimple() {
                 className="p-1 font-medium"
               >
                 <div className="flex items-center ">
-                  <a
+                  <Link
                     href="/auth/login"
                     className="hover:text-blue-500 transition-colors"
                   >
                     Login
-                  </a>
+                  </Link>
                   <div className="mx-1">/</div>
 
-                  <a
+                  <Link
                     href="/auth/register"
                     className=" hover:text-blue-500 transition-colors"
                   >
                     Register
-                  </a>
+                  </Link>
                 </div>
               </Typography>
             )}
@@ -179,12 +184,12 @@ export default function NavbarSimple() {
             color="blue-gray"
             className="p-1 font-medium"
           >
-            <a
+            <Link
               href="/"
               className="flex items-center hover:text-blue-500 transition-colors"
             >
               Home
-            </a>
+            </Link>
           </Typography>
           <Typography
             as="li"
@@ -192,12 +197,12 @@ export default function NavbarSimple() {
             color="blue-gray"
             className="p-1 font-medium"
           >
-            <a
+            <Link
               href="/gamelist"
               className="flex items-center hover:text-blue-500 transition-colors"
             >
               Game List
-            </a>
+            </Link>
           </Typography>
           <Typography
             as="li"
@@ -205,12 +210,12 @@ export default function NavbarSimple() {
             color="blue-gray"
             className="p-1 font-medium"
           >
-            <a
+            <Link
               href="/leaderboard"
               className="flex items-center hover:text-blue-500 transition-colors"
             >
               Leaderboard
-            </a>
+            </Link>
           </Typography>
           {isLoggedIn ? (
             <Typography
@@ -220,12 +225,12 @@ export default function NavbarSimple() {
               className="p-1 font-medium"
             >
               <div className="flex items-center ">
-                <a
+                <Link
                   href="/profile"
                   className="hover:text-blue-500 transition-colors"
                 >
                   Profile
-                </a>
+                </Link>
                 <div className="mx-1">/</div>
 
                 <button
@@ -244,20 +249,20 @@ export default function NavbarSimple() {
               className="p-1 font-medium"
             >
               <div className="flex items-center ">
-                <a
+                <Link
                   href="/auth/login"
                   className="hover:text-blue-500 transition-colors"
                 >
                   Login
-                </a>
+                </Link>
                 <div className="mx-1">/</div>
 
-                <a
+                <Link
                   href="/auth/register"
                   className=" hover:text-blue-500 transition-colors"
                 >
                   Register
-                </a>
+                </Link>
               </div>
             </Typography>
           )}
