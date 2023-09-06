@@ -100,24 +100,26 @@ export function ProfileCard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3">
       {/* Modal */}
-      
+
       <Dialog open={open} handler={handleOpen}>
-        <DialogHeader className='font-bold text-2xl'>Edit Profile
-        <button
-        onClick={handleClose}
-        className="ml-auto text-gray-500 hover:text-red-500 hover:bg-transparent focus:outline-none">
-          <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          viewBox="0 0 20 20"
-          fill="currentColor"
+        <DialogHeader className="font-bold text-2xl">
+          Edit Profile
+          <button
+            onClick={handleClose}
+            className="ml-auto text-gray-500 hover:text-red-500 hover:bg-transparent focus:outline-none"
           >
-          <path
-          fillRule="evenodd"
-          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-          clipRule="evenodd"
-          />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
           </button>
         </DialogHeader>
         <DialogBody divider>
@@ -131,12 +133,15 @@ export function ProfileCard() {
               name="email"
               value={email}
               onChange={handleEmailChange}
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
 
-          <div class="mb-4">
-            <label for="password" class="block text-gray-500 font-bold mb-1">
+          <div className="mb-4">
+            <label
+              for="password"
+              className="block text-gray-500 font-bold mb-1"
+            >
               Password:
             </label>
             <input
@@ -145,7 +150,7 @@ export function ProfileCard() {
               name="password"
               value={password}
               onChange={handlePasswordChange}
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
         </DialogBody>
@@ -158,7 +163,12 @@ export function ProfileCard() {
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="blue" onClick={handleOpen} className="hover:bg-blue-400 hover:text-white">
+          <Button
+            variant="gradient"
+            color="blue"
+            onClick={handleOpen}
+            className="hover:bg-blue-400 hover:text-white"
+          >
             <span>Confirm</span>
           </Button>
         </DialogFooter>
@@ -193,10 +203,10 @@ export function ProfileCard() {
               >
                 Username
               </Typography>
-              <div class="mb-4">
+              <div className="mb-4">
                 <label
                   for="email"
-                  class="text-gray-500 font-bold mb-1 mb-0 pr-4"
+                  className="text-gray-500 font-bold mb-1 mb-0 pr-4"
                 >
                   Email:
                 </label>{' '}
@@ -205,14 +215,14 @@ export function ProfileCard() {
                   id="email"
                   name="email"
                   value={email}
-                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
               </div>
 
-              <div class="mb-4">
+              <div className="mb-4">
                 <label
                   for="password"
-                  class="text-gray-500 font-bold mb-1 mb-0 pr-4"
+                  className="text-gray-500 font-bold mb-1 mb-0 pr-4"
                 >
                   Password:
                 </label>{' '}
@@ -221,7 +231,7 @@ export function ProfileCard() {
                   id="password"
                   name="password"
                   value={password}
-                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
               </div>
               <Button

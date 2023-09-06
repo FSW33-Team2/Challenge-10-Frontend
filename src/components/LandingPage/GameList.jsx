@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import {
   Card,
   CardHeader,
@@ -6,16 +6,15 @@ import {
   CardFooter,
   Typography,
   Button,
-} from "@material-tailwind/react";
- 
+} from '@material-tailwind/react'
+
 export function LandingPageCard() {
   return (
     <div className="w-full py-5">
       <div className="w-full text-center text-black">
         <Typography variant="h2">Game List</Typography>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
-
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
@@ -108,7 +107,6 @@ export function LandingPageCard() {
           </CardFooter>
         </Card>
       </div>
-      
     </div>
-  );
+  )
 }
