@@ -7,45 +7,151 @@ import {
   Typography,
   Button,
 } from '@material-tailwind/react'
+import { fetchAllGames } from '@/redux/features/GamesByIdSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { insertHistory } from '@/redux/features/PlayedGames'
 
 export function GameListPage() {
+  const dispatch = useDispatch()
+  const { data, loading } = useSelector((state) => state.allgames)
+  const historyData = useSelector((state) => state.gamehistory.data)
+  const [history, setHistory] = useState(historyData)
+
+  console.log(data)
+  console.log(historyData)
+  useEffect(() => {
+    dispatch(fetchAllGames())
+  }, [dispatch])
+
+  const addToHistory = (gameData) => {
+    setHistory([...history, gameData])
+    dispatch(insertHistory({ data: gameData }))
+  }
+
   return (
     <div className="w-full py-5">
       <div className="w-full text-center text-black">
         <Typography variant="h2">Game List</Typography>
       </div>
+      <div className="w-full text-center text-black mt-[20px]">
+        <Typography variant="h2">Your History</Typography>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+        {history.map((data, index) => {
+          return (
+            <Card className="mt-6 w-full">
+              <CardHeader color="blue-gray" className="relative h-56">
+                <Link href={`/gamedetail/${data.id}`}>
+                  <img
+                    src="/GameListPageImage/traditional.jpg"
+                    alt="card-image"
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
+              </CardHeader>
+              <CardBody>
+                <Typography variant="h5" color="blue-gray" className="mb-2">
+                  {data.title}
+                </Typography>
+                <Typography>
+                  If you love Rock Paper Scissors in real life but don't have
+                  anyone to play with, then this game will help you pass your
+                  time
+                </Typography>
+              </CardBody>
+              <CardFooter className="pt-0">
+                <Link href={`/gamedetail/${data.id}`}>
+                  <Button>Play Game</Button>
+                </Link>
+              </CardFooter>
+            </Card>
+          )
+        })}
+      </div>
+      <div className="w-full text-center text-black">
+        <Typography variant="h2">Playable Games</Typography>
+      </div>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+          {data.map((data, index) => {
+            return (
+              <Card className="mt-6 w-full">
+                <CardHeader color="blue-gray" className="relative h-56">
+                  <Link href={`/gamedetail/${data.id}`}>
+                    <img
+                      src="/GameListPageImage/traditional.jpg"
+                      alt="card-image"
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
+                </CardHeader>
+                <CardBody>
+                  <Typography variant="h5" color="blue-gray" className="mb-2">
+                    {data.title}
+                  </Typography>
+                  <Typography>
+                    If you love Rock Paper Scissors in real life but don't have
+                    anyone to play with, then this game will help you pass your
+                    time
+                  </Typography>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <Link href={`/gamedetail/${data.id}`}>
+                    <Button>Play Game</Button>
+                  </Link>
+                  <Button
+                    onClick={() => addToHistory([data])}
+                    className="ms-[20px]"
+                  >
+                    Add History
+                  </Button>
+                </CardFooter>
+              </Card>
+            )
+          })}
+        </div>
+      )}
+
+      <div className="w-full text-center text-black">
+        <Typography variant="h2">Coming Soon Games</Typography>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
-            <img
-              src="/GameListPageImage/traditional.jpg"
-              alt="card-image"
-              className="w-full h-full object-cover"
-            />
+            <Link href={`/gamedetail/dummy`}>
+              <img
+                src="/GameListPageImage/rockpaperstrategy.jpg"
+                alt="card-image"
+                className="w-full h-full object-cover"
+              />
+            </Link>
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              Rock Paper Scissors
+              Rock Paper Scissors 2
             </Typography>
-            <Typography>
-              If you love Rock Paper Scissors in real life but don't have anyone
-              to play with, then this game will help you pass your time
-            </Typography>
+            <Typography>New game play of rock paper scissors</Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <a href="/gamedetail">
+            <Link href={`/gamedetail/dummy`}>
               <Button>Play Game</Button>
-            </a>
+            </Link>
           </CardFooter>
         </Card>
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
-            <img
-              src="/GameListPageImage/metal-slug.jpg"
-              alt="card-image"
-              className="w-full h-full object-cover"
-            />
+            <Link href={`/gamedetail/dummy`}>
+              <img
+                src="/GameListPageImage/metal-slug.jpg"
+                alt="card-image"
+                className="w-full h-full object-cover"
+              />
+            </Link>
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -59,19 +165,21 @@ export function GameListPage() {
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <a href="/leaderboard">
-              <Button>Show Score</Button>
-            </a>
+            <Link href={`/gamedetail/dummy`}>
+              <Button>Play Game</Button>
+            </Link>
           </CardFooter>
         </Card>
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
-            <img
-              src="/GameListPageImage/pubg.jpg"
-              alt="card-image"
-              className="w-full h-full object-cover"
-            />
+            <Link href={`/gamedetail/dummy`}>
+              <img
+                src="/GameListPageImage/pubg.jpg"
+                alt="card-image"
+                className="w-full h-full object-cover"
+              />
+            </Link>
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
@@ -84,34 +192,9 @@ export function GameListPage() {
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <a href="/leaderboard">
-              <Button>Show Score</Button>
-            </a>
-          </CardFooter>
-        </Card>
-
-        <Card className="mt-6 w-full">
-          <CardHeader color="blue-gray" className="relative h-56">
-            <img
-              src="/GameListPageImage/free-fire.jpg"
-              alt="card-image"
-              className="w-full h-full object-cover"
-            />
-          </CardHeader>
-          <CardBody>
-            <Typography variant="h5" color="blue-gray" className="mb-2">
-              Free Fire
-            </Typography>
-            <Typography>
-              Free Fire is a world-famous survival shooter game available on
-              mobile. Each 10-minute game places you on a remote island where
-              you are pit against 49 others.
-            </Typography>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <a href="/leaderboard">
-              <Button>Show Score</Button>
-            </a>
+            <Link href={`/gamedetail/dummy`}>
+              <Button>Play Game</Button>
+            </Link>
           </CardFooter>
         </Card>
       </div>
