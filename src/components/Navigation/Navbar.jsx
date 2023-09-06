@@ -12,19 +12,30 @@ import {
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchUserToken } from '@/redux/features/Auth/UserTokenSlice'
-import { LoginAction } from '@/redux/features/Auth/AuthReducer'
+import { LoginAction, LogoutAction } from '@/redux/features/Auth/AuthReducer'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 export default function NavbarSimple() {
+  const router = useRouter()
   const dispatch = useDispatch()
-  const usertoken = useSelector((state) => state.usertoken.data)
   const isLoggedIn = useSelector((state) => state.authreducer.isLoggedIn)
   let refreshToken = Cookies.get('refreshToken')
 
   useEffect(() => {
-    AuthCheck()
-
     dispatch(fetchUserToken())
+    AuthCheck()
   }, [refreshToken, dispatch])
+
+  const Logout = async () => {
+    try {
+      await axios.delete('http://localhost:8000/api/auth/logout')
+      dispatch(LogoutAction())
+      router.push('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const AuthCheck = () => {
     if (refreshToken !== undefined) {
@@ -105,19 +116,19 @@ export default function NavbarSimple() {
               >
                 <div className="flex items-center ">
                   <a
-                    href="/auth/login"
+                    href="/profile"
                     className="hover:text-blue-500 transition-colors"
                   >
                     Profile
                   </a>
                   <div className="mx-1">/</div>
 
-                  <a
-                    href="/auth/register"
+                  <button
+                    onClick={Logout}
                     className=" hover:text-blue-500 transition-colors"
                   >
                     Logout
-                  </a>
+                  </button>
                 </div>
               </Typography>
             ) : (
@@ -210,19 +221,19 @@ export default function NavbarSimple() {
             >
               <div className="flex items-center ">
                 <a
-                  href="/auth/login"
+                  href="/profile"
                   className="hover:text-blue-500 transition-colors"
                 >
                   Profile
                 </a>
                 <div className="mx-1">/</div>
 
-                <a
-                  href="/auth/register"
+                <button
+                  onClick={Logout}
                   className=" hover:text-blue-500 transition-colors"
                 >
                   Logout
-                </a>
+                </button>
               </div>
             </Typography>
           ) : (

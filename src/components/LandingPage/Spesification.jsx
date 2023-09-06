@@ -32,7 +32,7 @@ export default function LandingPageSpesification() {
             <TimelineBody className="pb-8">
               <Typography
                 variant="small"
-                color="gary"
+                color="gray"
                 className="font-normal text-gray-600"
               >
                 it is recommended to have at least 8 GB of RAM in a dual-channel
@@ -55,7 +55,7 @@ export default function LandingPageSpesification() {
             <TimelineBody className="pb-8">
               <Typography
                 variant="small"
-                color="gary"
+                color="gray"
                 className="font-normal text-gray-600"
               >
                 OS: Windows 10 · CPU: Intel® Core™ i7 or better
@@ -76,7 +76,7 @@ export default function LandingPageSpesification() {
             <TimelineBody>
               <Typography
                 variant="small"
-                color="gary"
+                color="gray"
                 className="font-normal text-gray-600"
               >
                 Processor: Intel Core 2 Duo E8400 or AMD Athlon 200GE
