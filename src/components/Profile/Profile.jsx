@@ -11,46 +11,72 @@ import {
   DialogBody,
   DialogFooter,
 } from '@material-tailwind/react'
-import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMedal } from '@fortawesome/free-solid-svg-icons'
+import React, { useState, useEffect } from 'react'
+import axios from '../lib/axios'
+import jwtDecode from 'jwt-decode'
 
 export function ProfileCard() {
-  const [email, setEmail] = useState('user@example.com')
-  const [password, setPassword] = useState('yourpassword')
-  const initialData = { email: 'user@example.com', password: 'yourpassword' }
-  const [formData, setFormData] = useState(initialData)
+  const [userId, setUserId] = useState('')
+  const [totalscore, setTotalScore] = useState(null)
+  const [scoreHistory, setScoreHistory] = useState([])
+  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(!open)
+
+  const handleOpen = async () => {
+    setOpen(!open)
+  }
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value)
   }
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value)
   }
 
-  const handleClose = () => {
+  const handleClose = async () => {
+    const response = await axios.get('/api/auth/token')
+    const decoded = jwtDecode(response.data.accessToken)
+    // Kembalikan data ke data awal
+    setUsername(decoded.username)
+    setEmail(decoded.email)
+
+    // Tutup modal setelah mengonfirmasi pembatalan
     handleOpen(false)
   }
 
-  const handleModalCancel = () => {
+  const updateData = async () => {
+    const updateUserData = await axios.put(`api/player/${userId}`, {
+      username: username,
+      email: email,
+    })
+    if (updateUserData.status !== 200) {
+      console.log('Save data has failed')
+    } else {
+      console.log('Save data has success')
+    }
+    handleOpen(false)
+  }
+
+  const handleModalCancel = async () => {
     const confirmCancel = window.confirm(
       'Apakah Anda yakin ingin membatalkan perubahan? Data akan kembali ke data awal.'
     )
 
     if (confirmCancel) {
+      const response = await axios.get('/api/auth/token')
+      const decoded = jwtDecode(response.data.accessToken)
       // Kembalikan data ke data awal
-      setEmail(initialData.email)
-      setPassword(initialData.password)
+      setUsername(decoded.username)
+      setEmail(decoded.email)
 
       // Tutup modal setelah mengonfirmasi pembatalan
       handleOpen(false)
     }
   }
 
-  const TABLE_HEAD = ['Username', 'Game', 'Score', 'Medals']
+  const TABLE_HEAD = ['No', 'Game', 'Result', 'Date']
 
   const TABLE_ROWS = [
     {
@@ -84,16 +110,49 @@ export function ProfileCard() {
     },
   ]
 
-  const achievement = (position) => {
-    switch (position) {
-      case 1:
-        return <FontAwesomeIcon icon={faMedal} color="gold" />
-      case 2:
-        return <FontAwesomeIcon icon={faMedal} color="silver" />
-      case 3:
-        return <FontAwesomeIcon icon={faMedal} color="brown" />
-      default:
-        return null
+  useEffect(() => {
+    refreshToken()
+  }, [])
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get('/api/auth/token')
+      const decoded = jwtDecode(response.data.accessToken)
+      setUserId(decoded.userId)
+      setUsername(decoded.username)
+      setEmail(decoded.email)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (userId) {
+      getScore()
+      getHistoryData()
+    }
+  }, [userId])
+
+  const getScore = async () => {
+    console.log(userId)
+    try {
+      const response = await axios.get(`/api/score/${userId}`)
+      const score = response.data.totalScore
+      console.log(score)
+      setTotalScore(score)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getHistoryData = async () => {
+    console.log(userId)
+    try {
+      const getHistory = await axios.get(`/api/score/history/${userId}`)
+      const historydata = getHistory.data.score
+      setScoreHistory(historydata)
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -125,14 +184,14 @@ export function ProfileCard() {
         <DialogBody divider>
           <div class="mb-4">
             <label for="email" class="block text-gray-500 font-bold mb-1">
-              Email:
+              Username:
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              value={email}
-              onChange={handleEmailChange}
+              value={username}
+              onChange={handleUsernameChange}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
@@ -142,14 +201,14 @@ export function ProfileCard() {
               for="password"
               className="block text-gray-500 font-bold mb-1"
             >
-              Password:
+              Email:
             </label>
             <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
+              type="string"
+              id="string"
+              name="string"
+              value={email}
+              onChange={handleEmailChange}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
@@ -166,7 +225,7 @@ export function ProfileCard() {
           <Button
             variant="gradient"
             color="blue"
-            onClick={handleOpen}
+            onClick={updateData}
             className="hover:bg-blue-400 hover:text-white"
           >
             <span>Confirm</span>
@@ -201,7 +260,7 @@ export function ProfileCard() {
                 color="blue-gray"
                 className="mb-2 text-center"
               >
-                Username
+                {username}
               </Typography>
               <div className="mb-4">
                 <label
@@ -221,16 +280,16 @@ export function ProfileCard() {
 
               <div className="mb-4">
                 <label
-                  for="password"
+                  for="score"
                   className="text-gray-500 font-bold mb-1 mb-0 pr-4"
                 >
-                  Password:
+                  Score
                 </label>{' '}
                 <input
-                  type="password"
-                  id="password"
+                  type="integer"
+                  id="integer"
+                  value={totalscore * 1000}
                   name="password"
-                  value={password}
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 />
               </div>
@@ -274,45 +333,57 @@ export function ProfileCard() {
                 </tr>
               </thead>
               <tbody>
-                {TABLE_ROWS.map(({ username, game, score }, index) => {
-                  const isLast = index === TABLE_ROWS.length - 1
-                  const classes = isLast
-                    ? 'p-4'
-                    : 'p-4 border-b border-blue-gray-50'
+                {scoreHistory.map(
+                  ({ username, gameId, score, createdAt }, index) => {
+                    const isLast = index === TABLE_ROWS.length - 1
+                    const classes = isLast
+                      ? 'p-4'
+                      : 'p-4 border-b border-blue-gray-50'
 
-                  return (
-                    <tr key={username}>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {index + 1}. {username}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {game}
-                        </Typography>
-                      </td>
-                      <td className={classes}>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {score}
-                        </Typography>
-                      </td>
-                      <td className={classes}>{achievement(index + 1)}</td>
-                    </tr>
-                  )
-                })}
+                    return (
+                      <tr key={username}>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {index + 1}.
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {gameId === 1
+                              ? 'Gunting Batu Kertas'
+                              : 'Kertas Gunting Batu'}
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {score === 1 ? 'win' : 'lose'}
+                          </Typography>
+                        </td>
+                        <td className={classes}>
+                          <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal"
+                          >
+                            {createdAt}
+                          </Typography>
+                        </td>
+                      </tr>
+                    )
+                  }
+                )}
               </tbody>
             </table>
           </Card>
@@ -324,16 +395,19 @@ export function ProfileCard() {
                     Motto :
                   </h4>
                   <p className="text-sm md:text-base text-gray-600 text-center">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum.
+                    "Gamer extraordinaire, navigating the virtual realms with
+                    the precision of a sharpshooter and the strategy of a
+                    grandmaster. From the pixelated landscapes of retro classics
+                    to the immersive worlds of modern RPGs, I've conquered them
+                    all. When I'm not grinding levels or chasing high scores,
+                    you can find me theorycrafting the perfect loadout or
+                    analyzing game mechanics. My gaming rig is a work of art,
+                    and my collection of in-game achievements is a testament to
+                    my dedication. Whether I'm leading my squad to victory in
+                    online battles or uncovering hidden secrets in single-player
+                    adventures, I'm always up for the next epic gaming quest.
+                    Let's team up and conquer virtual worlds together!" 🎮✨
+                    #GamerLife #GameOn
                   </p>
                 </div>
               </div>

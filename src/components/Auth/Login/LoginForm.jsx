@@ -1,20 +1,25 @@
 'use client'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useState, useEffect } from 'react'
+import { redirect, useRouter } from 'next/navigation'
 import axios from 'axios'
+import { Spinner } from '@material-tailwind/react'
 import { LoginAction } from '@/redux/features/Auth/AuthReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { clickButton } from '@/redux/features/DynamicButton'
 axios.defaults.withCredentials = true
 
 export default function LoginFormPage() {
   const dispatch = useDispatch()
+  const router = useRouter()
+  const { btnState } = useSelector((state) => state.button)
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+
   const [state, setState] = React.useState({
     email: '',
     password: '',
   })
   const [msg, setMsg] = useState('')
-  const router = useRouter()
 
   const handleChange = (evt) => {
     const value = evt.target.value
@@ -37,7 +42,11 @@ export default function LoginFormPage() {
           password: password,
         }
       )
-      router.push('/profile')
+      await dispatch(clickButton({ btnState: 'loading' }))
+      setTimeout(() => {
+        dispatch(clickButton({ btnState: 'success' }))
+        router.push('/profile')
+      }, 3000)
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg)
@@ -46,7 +55,10 @@ export default function LoginFormPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div
+      style={{ backgroundColor: '' }}
+      className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"
+    >
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
@@ -54,7 +66,11 @@ export default function LoginFormPage() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={handleOnSubmit} className="space-y-6">
+        <form
+          onSubmit={handleOnSubmit}
+          disabled={isButtonDisabled}
+          className="space-y-6"
+        >
           <p className="text-red-600 text-center">{msg}</p>
           <div>
             <label
@@ -107,15 +123,18 @@ export default function LoginFormPage() {
               </a>
             </div>
           </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Sign in
-            </button>
-          </div>
+          {btnState === 'loading' ? (
+            <Spinner className="flex w-full justify-center rounded-md font-semibold leading-6 text-white shadow-sm" />
+          ) : (
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign in
+              </button>
+            </div>
+          )}
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
@@ -124,7 +143,7 @@ export default function LoginFormPage() {
             href="/auth/register"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
-            Register here
+            <button disabled={isButtonDisabled}>Register here</button>
           </Link>
         </p>
       </div>
