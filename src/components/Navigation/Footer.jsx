@@ -3,16 +3,16 @@ import { Typography } from "@material-tailwind/react";
  
 const LINKS = [
   {
-    title: "Product",
-    items: ["Overview", "Features", "Solutions", "Tutorials"],
+    title: "Game List",
+    items: ["PUBG", "Metal-SLUG", "Traditional Game", "Free-Fire"],
   },
   {
     title: "Company",
     items: ["About us", "Careers", "Press", "News"],
   },
   {
-    title: "Resource",
-    items: ["Blog", "Newsletter", "Events", "Help center"],
+    title: "Customer Service",
+    items: ["Diamond", "Newsletter", "Events", "Help center"],
   },
 ];
  
