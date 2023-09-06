@@ -18,21 +18,19 @@ export default function NavbarSimple() {
   const dispatch = useDispatch()
   const usertoken = useSelector((state) => state.usertoken.data)
   const isLoggedIn = useSelector((state) => state.authreducer.isLoggedIn)
-
-  console.log(usertoken)
-  useEffect(() => {
-    dispatch(fetchUserToken())
-  }, [dispatch])
-
-  const AuthCheck = () => {
-    if (Object.keys(usertoken).length != 0) {
-      dispatch(LoginAction())
-    }
-  }
+  let refreshToken = Cookies.get('refreshToken')
 
   useEffect(() => {
     AuthCheck()
-  }, [usertoken])
+
+    dispatch(fetchUserToken())
+  }, [refreshToken, dispatch])
+
+  const AuthCheck = () => {
+    if (refreshToken !== undefined) {
+      dispatch(LoginAction())
+    }
+  }
 
   const [openNav, setOpenNav] = React.useState(false)
 

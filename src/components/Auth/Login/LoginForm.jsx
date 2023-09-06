@@ -37,13 +37,7 @@ export default function LoginFormPage() {
           password: password,
         }
       )
-
-      if (postLogin.status !== 200) {
-        setMsg(error.response.data.msg)
-      } else {
-        dispatch(LoginAction())
-      }
-      router.push('/')
+      router.push('/profile')
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg)
