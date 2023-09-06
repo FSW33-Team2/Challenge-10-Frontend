@@ -20,17 +20,17 @@ export default function CarouselCustomNavigation() {
       )}
     >
       <img
-        src="https://dummyimage.com/1200x400/000/fff"
-        alt="image 1"
-        className="h-full w-full object-cover"
+      src="/GameListPageImage/traditional.jpg"
+      alt="card-image"
+      className="h-full w-full object-cover"
       />
       <img
-        src="https://dummyimage.com/1200x400/000/fff"
+        src="/GameListPageImage/pubg.jpg"
         alt="image 2"
         className="h-full w-full object-cover"
       />
       <img
-        src="https://dummyimage.com/1200x400/000/fff"
+        src="/GameListPageImage/free-fire.jpg"
         alt="image 3"
         className="h-full w-full object-cover"
       />

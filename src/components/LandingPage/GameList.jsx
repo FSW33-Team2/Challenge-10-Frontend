@@ -19,88 +19,92 @@ export function LandingPageCard() {
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
-              src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+              src="/GameListPageImage/metal-slug.jpg"
               alt="card-image"
+              className="w-full h-full object-cover"
             />
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              UI/UX Review Check
+              Metal Slug
             </Typography>
             <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
+            Metal Slug is a series of run and gun video games first released on Neo-Geo arcade machines and game consoles created by SNK.
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button>Read More</Button>
+          <a href="/gamelist">
+            <Button>Play Game</Button>
+            </a>
           </CardFooter>
         </Card>
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
-              src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+              src="/GameListPageImage/pubg.jpg"
               alt="card-image"
+              className="w-full h-full object-cover"
             />
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              UI/UX Review Check
+             PUBG
             </Typography>
             <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
+            PUBG MOBILE is the FREE battle royale shooter that chosen by over 1 billion players worldwide. Extreme battles in 10-minute matches, play anytime, anywhere!
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button>Read More</Button>
+          <a href="/gamelist">
+            <Button>Play Game</Button>
+            </a>
           </CardFooter>
         </Card>
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
-              src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+              src="/GameListPageImage/traditional.jpg"
               alt="card-image"
+              className="w-full h-full object-cover"
             />
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              UI/UX Review Check
+              Rock-Paper-Scissor
             </Typography>
             <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
+            A classic game - Rock, Paper, Scissors! Choose one of the three choices - and see if you can beat the computer. Will you win? The chance is random!
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button>Read More</Button>
+          <a href="/gamedetail">
+            <Button>Play Game</Button>
+            </a>
           </CardFooter>
         </Card>
 
         <Card className="mt-6 w-full">
           <CardHeader color="blue-gray" className="relative h-56">
             <img
-              src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+              src="/GameListPageImage/free-fire.jpg"
               alt="card-image"
+              className="w-full h-full object-cover"
             />
           </CardHeader>
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-2">
-              UI/UX Review Check
+              Free Fire
             </Typography>
             <Typography>
-              The place is close to Barceloneta Beach and bus stop just 2 min by
-              walk and near to &quot;Naviglio&quot; where you can enjoy the main
-              night life in Barcelona.
+            Free Fire is a world-famous survival shooter game available on mobile. Each 10-minute game places you on a remote island where you are pit against 49 others.
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button>Read More</Button>
+          <a href="/gamelist">
+            <Button>Play Game</Button>
+            </a>
           </CardFooter>
         </Card>
       </div>

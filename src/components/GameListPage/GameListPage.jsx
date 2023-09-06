@@ -34,7 +34,9 @@ export function GameListPage() {
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
-            <Button>Show Score</Button>
+          <a href="/gamedetail">
+            <Button>Play Game</Button>
+            </a>
           </CardFooter>
         </Card>
 
@@ -58,7 +60,9 @@ export function GameListPage() {
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
+          <a href="/leaderboard">
             <Button>Show Score</Button>
+            </a>
           </CardFooter>
         </Card>
 
@@ -81,10 +85,34 @@ export function GameListPage() {
             </Typography>
           </CardBody>
           <CardFooter className="pt-0">
+          <a href="/leaderboard">
             <Button>Show Score</Button>
+            </a>
           </CardFooter>
         </Card>
 
+        <Card className="mt-6 w-full">
+          <CardHeader color="blue-gray" className="relative h-56">
+            <img
+              src="/GameListPageImage/free-fire.jpg"
+              alt="card-image"
+              className="w-full h-full object-cover"
+            />
+          </CardHeader>
+          <CardBody>
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+            Free Fire
+            </Typography>
+            <Typography>
+            Free Fire is a world-famous survival shooter game available on mobile. Each 10-minute game places you on a remote island where you are pit against 49 others.
+            </Typography>
+          </CardBody>
+          <CardFooter className="pt-0">
+          <a href="/leaderboard">
+            <Button>Show Score</Button>
+            </a>
+          </CardFooter>
+        </Card>
       </div>
       
     </div>
